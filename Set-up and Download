@@ -8,6 +8,9 @@ mkdir 1_analysis
 mkdir 2_trimmomatic
 nano README.md #summary of project
 
+#load software
+module load sra-tools trimmomatic fastqc
+
 #Download sequences
 cd raw_data
 fastq-dump SRR2033699 #LrhA deletion strain
