@@ -1,0 +1,8 @@
+cd 1_analysis
+mkdir 2_fastqc_trim
+fastqc -t 2 -o . ../../2_trimmomatic/SRR2033675_1.trimmed.fastq 
+fastqc -t 2 -o . ../../2_trimmomatic/SRR2033686_1.trimmed.fastq 
+fastqc -t 2 -o . ../../2_trimmomatic/SRR2033699_1.trimmed.fastq 
+#go to Desktop to copy fastcq files
+scp gmcsween@login.newton.utk.edu:~/stewartii/1_analysis/2_fastqc_trim/*html .
+#monitor for quality base pairs- check ends
