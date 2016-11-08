@@ -1,0 +1,8 @@
+#Trim each file as Single End Reads
+
+cd 2_trimmomatic
+~/stewartii/2_trimmomatic> trimmomatic SE \
+> ../raw_data/SRR2033675_1.fastq \
+> SRR2033675_1.trimmed.fastq \
+> ILLUMINACLIP:/data/apps/trimmomatic/0.36/adapters/TruSeq3-SE.fa:2:30:10 \
+> LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
