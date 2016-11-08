@@ -1,0 +1,19 @@
+#Set-up for Transcriptome Analysis
+
+#Make directory
+mkdir stewartii
+cd stewartii
+mkdir raw_data
+mkdir 1_analysis
+mkdir 2_trimmomatic
+nano README.md #summary of project
+
+#Download sequences
+cd raw_data
+fastq-dump SRR2033699 #LrhA deletion strain
+fastq-dump SRR2033686 #RcsA deletion strain
+fastq-dump SRR2033675 #WT strain
+
+#Get reference genome
+wget wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF_000757405.1_LMG2632assem4_genomic.fna.gz
+gunzip GCF_000757405.1_LMG2632assem4_genomic.fna.gz
