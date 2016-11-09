@@ -1,0 +1,11 @@
+#Use samtools to convert sam to bam files
+conda install -y samtools
+qrsh
+cd stewartii/3_alignment
+mkdir sorted_bam
+#for loop saved to bam.sh nano file
+#for each *.sam file
+for i in `seq 25 40`
+do
+   samtools sort ./alignment_output/SRR2033675_1.trimmed.sam -o ./sorted_bam/SRR2033675.trimmed.sorted.bam
+done
