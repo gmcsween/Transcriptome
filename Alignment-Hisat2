@@ -3,6 +3,22 @@ cd stewartii
 mkdir 3_alignment
 cd 3_alignment
 mkdir genomeDir
-cd genomeDir
 conda install hisat2 -y
 
+#Index the reference genome
+~/stewartii/3_alignment/genomeDir> qrsh
+~> cd stewartii/3_alignment/genomeDir/
+~/stewartii/3_alignment/genomeDir> hisat2-build -p 2 \
+> ../../raw_data/GCA_000757405.1_LMG2632assem4_genomic.fna \
+> ./Stewart_index
+
+#Align
+mkdir alignment_output
+for i in `seq 25 40`
+do
+     hisat2 ./genomeDir/Athal_index      \
+            -1 ../0_raw_data/DRR0161${i}_1.1percent.fastq   \
+            -2 ../0_raw_data/DRR0161${i}_2.1percent.fastq   \
+            -S ./alignment_output/DRR0161${i}.sam             \
+            -p 2
+done
