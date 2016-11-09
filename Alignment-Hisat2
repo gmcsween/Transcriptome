@@ -14,11 +14,13 @@ conda install hisat2 -y
 
 #Align
 mkdir alignment_output
-for i in `seq 25 40`
+#for each *trimmed.fastq file
+#for loop saved to file align.sh
+for i in 'seq 25 40'
 do
-     hisat2 ./genomeDir/Athal_index      \
-            -1 ../0_raw_data/DRR0161${i}_1.1percent.fastq   \
-            -2 ../0_raw_data/DRR0161${i}_2.1percent.fastq   \
-            -S ./alignment_output/DRR0161${i}.sam             \
-            -p 2
+     hisat ./genomeDir/Stewart_index \
+          -U ../2_trimmomatic/SRR2033675_1.trimmed.fastq 
+          -S ./alignment_output/SRR2033675_1.trimmed.sam \
+          -p 2 \
 done
+
