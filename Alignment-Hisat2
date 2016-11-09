@@ -1,0 +1,8 @@
+#Make directories and install Hisat2
+cd stewartii
+mkdir 3_alignment
+cd 3_alignment
+mkdir genomeDir
+cd genomeDir
+conda install hisat2 -y
+
