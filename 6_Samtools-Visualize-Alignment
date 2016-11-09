@@ -10,3 +10,6 @@ for i in `seq 25 40`
 do
    samtools sort ./alignment_output/SRR2033675_1.trimmed.sam -o ./sorted_bam/SRR2033675.trimmed.sorted.bam
 done
+
+#Visualize sorted bam
+#https://ccb.jhu.edu/software/hisat2/manual.shtml#aligning-example-reads
