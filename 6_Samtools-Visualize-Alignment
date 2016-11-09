@@ -5,6 +5,7 @@ cd stewartii/3_alignment
 mkdir sorted_bam
 #for loop saved to bam.sh nano file
 #for each *.sam file
+#must give different output destinations (sorted_bam) if want to run at same time
 for i in `seq 25 40`
 do
    samtools sort ./alignment_output/SRR2033675_1.trimmed.sam -o ./sorted_bam/SRR2033675.trimmed.sorted.bam
