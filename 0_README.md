@@ -9,10 +9,10 @@ Outline:
 4)FASTQC for quality check
 5)HISAT2 to map sequences to reference genome
 6)Samtools to visualize alignment
-7)R package, DeSeq2, to normalize
-8)EDGE test to highlight statistically significant changes
-9)Download gene ontology terms from UnitProt
-10)Gene set enrichment analysis
-11)BLAST2GO to annotate transcript
-12)HTSeq to generate counts
+7)HTSeq to generate counts
+8)R package, DeSeq2, to normalize and differential expression analysis
+9)EDGE test to highlight statistically significant changes
+10)Download gene ontology terms from UnitProt
+11)Gene set enrichment analysis
+12)BLAST2GO to annotate transcript
 13)IGV to visualize
