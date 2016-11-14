@@ -11,5 +11,12 @@ do
    samtools sort ./alignment_output/SRR2033675_1.trimmed.sam -o ./sorted_bam/SRR2033675.trimmed.sorted.bam
 done
 
-#Visualize sorted bam
 #https://ccb.jhu.edu/software/hisat2/manual.shtml#aligning-example-reads
+#Used above for additional reference to class notes
+
+#Visualize sorted bam for each file
+module load samtools bcftools
+samtools mpileup -uf GCA_000757405.1_LMG2632assem4_genomic.fna sorted_bam/SRR2033675.trimmed.sorted.bam | bcftools call -mv --threads 2 > SRR2033675.raw.vcf
+#Filter out low quality variants
+bcftools filter -s LowQual -e '%QUAL<20 || DP>500' SRR2033675.raw.vcf > SRR2033675.flt.vcf
+grep 'LowQual' SRR2033675.flt.vcf #see what did not pass
