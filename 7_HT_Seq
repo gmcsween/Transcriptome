@@ -1,3 +1,42 @@
+#On head node
+nano count_reads.sh
+#enter the following into count_reads.sh
+
+#!/bin/bash
+
+## USAGE
+## ./count_reads.sh hisat2 /path/to/the/sorted_bam_file_directory bam_file_ORDER_TYPE
+
+mkdir counts_$1
+
+for sorted_bam_path in $(find $2 -name *.bam)
+do
+    counts_file=$(echo $sorted_bam_path | grep -o "SRR20336[0-9]*")_$1_ct
+    echo "The target bam file is: "$sorted_bam_path
+    echo "==================================================="
+    htseq-count -f bam \
+                -t gene \
+                -i ID \  #this is different for .gff file
+                -r $3 \
+                $sorted_bam_path \
+                ~/stewartii/5_count/GCF_000757405.1_LMG2632assem4_genomic.gff \
+                | \
+                grep -v '^__' > ./counts_$1/$counts_file
+    echo "The count data has been written into: $counts_file"
+    echo "==================================================="
+done
+#How to run:
+./count_reads.sh hisat2 ~/stewartii/3_alignment/sorted_bam name
+#This will output a directory called counts_hisat2 and 3 files (one for each SRR2033675/86/99_hisat_ct)
+
+#Pre-process data
+cd counts_hisat2
+echo gene_ID $(ls SRR* | grep -o "SRR20336[0-9]*" | tr "\n" ' ') | tr -s [:blank:] ',' > count_data.csv
+paste $(ls SRR* | sort) | awk '{for(i=3;i<=NF;i+=2) $i=""}{print}' | tr -s [:blank:] ',' >> count_data.csv
+
+#Transfer file to local computer
+
+
 #In R console
 
 #Install DESeq2
