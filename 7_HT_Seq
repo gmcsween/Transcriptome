@@ -1,0 +1,8 @@
+#In R console
+
+#Install DESeq2
+#enter all commands at once
+source("http://bioconductor.org/biocLite.R")
+biocLite("DESeq2")
+install.packages("colorspace")
+require("DESeq2")
