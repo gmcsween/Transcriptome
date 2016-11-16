@@ -1,3 +1,8 @@
+#Obtain .gtf/.gff file of genome
+#https://www.ncbi.nlm.nih.gov/genome/?term=txid66269[orgn]
+#Used above website to download to local computer and then transferred to head node
+#file name: GCF_000757405.1_LMG2632assem4_genomic.gff
+
 #On head node
 nano count_reads.sh
 #enter the following into count_reads.sh
@@ -34,8 +39,8 @@ cd counts_hisat2
 echo gene_ID $(ls SRR* | grep -o "SRR20336[0-9]*" | tr "\n" ' ') | tr -s [:blank:] ',' > count_data.csv
 paste $(ls SRR* | sort) | awk '{for(i=3;i<=NF;i+=2) $i=""}{print}' | tr -s [:blank:] ',' >> count_data.csv
 
-#Transfer file to local computer
-
+#Transfer file to local computer. Go to Desktop.
+scp gmcsween@login.newton.utk.edu:~/stewartii/5_count/counts_hisat2/count_data.csv .
 
 #In R console
 
@@ -45,3 +50,6 @@ source("http://bioconductor.org/biocLite.R")
 biocLite("DESeq2")
 install.packages("colorspace")
 require("DESeq2")
+
+#Differential Expression Analysis
+
