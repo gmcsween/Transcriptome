@@ -41,15 +41,3 @@ paste $(ls SRR* | sort) | awk '{for(i=3;i<=NF;i+=2) $i=""}{print}' | tr -s [:bla
 
 #Transfer file to local computer. Go to Desktop.
 scp gmcsween@login.newton.utk.edu:~/stewartii/5_count/counts_hisat2/count_data.csv .
-
-#In R console
-
-#Install DESeq2
-#enter all commands at once
-source("http://bioconductor.org/biocLite.R")
-biocLite("DESeq2")
-install.packages("colorspace")
-require("DESeq2")
-
-#Differential Expression Analysis
-
