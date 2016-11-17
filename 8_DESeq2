@@ -8,4 +8,19 @@ install.packages("colorspace")
 require("DESeq2")
 
 #Differential Expression Analysis
+#Go to directory with count_data.csv using setwd("directory")
+install.packages("DESeq2")
+library("DESeq2")
+countData = read.csv('count_data.csv', header = TRUE, row.names = 1)
+colData = read.csv('experimental_info.csv', header = TRUE, row.names = 1)[, c("phenotype")]
+colnames(countData) = paste0(colData["phenotype"], '_')
+rownames(colData) = paste0(colData["phenotype"], '_')
+# construct the data that analyzing functions from DESeq2 can recognize.
+dds = DESeqDataSetFromMatrix(countData=countData,colData=colData,design=~phenotype)
+dds
 
+ colnames(countData) = paste0(colData$run_accession_ID, '_', colData$phenotype)
+> rownames(colData) = paste0(colData$run_accession_ID, '_', colData$phenotype)
+> dds = DESeqDataSetFromMatrix(countData = countData,
++                              colData = colData,
++                              design = ~ run_accession_ID + phenotype)
