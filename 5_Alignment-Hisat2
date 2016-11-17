@@ -18,9 +18,9 @@ mkdir alignment_output
 #for loop saved to file align.sh
 for i in 'seq 25 40'
 do
-     hisat ./genomeDir/Stewart_index \
+     hisat ./genomeDir/2_genomeDir/2_Stewart_index \
           -U ../2_trimmomatic/SRR2033675_1.trimmed.fastq 
-          -S ./alignment_output/SRR2033675_1.trimmed.sam \
+          -S ./2_alignment_output/SRR2033675_1.trimmed.sam \
           -p 2 \
 done
 
