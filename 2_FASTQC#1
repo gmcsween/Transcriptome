@@ -1,7 +1,7 @@
 #FASTQC of SRA reads
 
 #Interactive session
-qrsh -pe threads 2 -1 mem=4G
+qrsh -pe threads 2 -l mem=4G
 
 #Quality examination
 cd stewartii
