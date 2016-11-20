@@ -36,7 +36,7 @@ done
 
 #Pre-process data
 cd counts_hisat2
-echo gene_ID $(ls SRR* | grep -o "SRR20336[0-9]*" | tr "\n" ' ') | tr -s [:blank:] ',' > count_data.csv
+echo ID $(ls SRR* | grep -o "SRR20336[0-9]*" | tr "\n" ' ') | tr -s [:blank:] ',' > count_data.csv
 paste $(ls SRR* | sort) | awk '{for(i=3;i<=NF;i+=2) $i=""}{print}' | tr -s [:blank:] ',' >> count_data.csv
 
 #Transfer file to local computer. Go to Desktop.
