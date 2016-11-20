@@ -1,7 +1,7 @@
 #Obtain .gtf/.gff file of genome
 #https://www.ncbi.nlm.nih.gov/genome/?term=txid66269[orgn]
 #Used above website to download to local computer and then transferred to head node
-#file name: GCF_000757405.1_LMG2632assem4_genomic.gff
+#file name: GCA_000248395.2_ASM24839v2_genomic.gff
 
 conda install htseq -y
 qrsh
@@ -24,7 +24,7 @@ do
                 -i ID \  #this is different for .gff file
                 -r $3 \
                 $sorted_bam_path \
-                ~/stewartii/5_count/GCF_000757405.1_LMG2632assem4_genomic.gff \
+                ~/stewartii/5_count/GCA_000248395.2_ASM24839v2_genomic.gff \
                 | \
                 grep -v '^__' > ./counts_$1/$counts_file
     echo "The count data has been written into: $counts_file"
