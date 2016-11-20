@@ -3,14 +3,14 @@
 #Used above website to download to local computer and then transferred to head node
 #file name: GCF_000757405.1_LMG2632assem4_genomic.gff
 
+conda install htseq -y
+qrsh
+
 #On head node
 nano count_reads.sh
 #enter the following into count_reads.sh
 
 #!/bin/bash
-
-## USAGE
-## ./count_reads.sh hisat2 /path/to/the/sorted_bam_file_directory bam_file_ORDER_TYPE
 
 mkdir counts_$1
 
