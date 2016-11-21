@@ -9,7 +9,7 @@ conda install hisat2 -y
 ~/stewartii/3_alignment/genomeDir> qrsh
 ~> cd stewartii/3_alignment/genomeDir/
 ~/stewartii/3_alignment/genomeDir> hisat2-build -p 2 \
-> ../../raw_data/GCA_000757405.1_LMG2632assem4_genomic.fna \
+> ../../raw_data/GCA_000248395.2_ASM24839v2_genomic.fna \
 > ./Stewart_index
 
 #Align
