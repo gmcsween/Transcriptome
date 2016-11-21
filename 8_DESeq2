@@ -1,3 +1,5 @@
+#https://bioc.ism.ac.jp/packages/2.14/bioc/vignettes/DESeq2/inst/doc/beginner.pdf
+#Used above in addition to class notes
 #In R console
 
 #Install DESeq2
@@ -8,19 +10,184 @@ install.packages("colorspace")
 require("DESeq2")
 
 #Differential Expression Analysis
+#RStudio
 #Go to directory with count_data.csv using setwd("directory")
-install.packages("DESeq2")
 library("DESeq2")
-countData = read.csv('count_data.csv', header = TRUE, row.names = 1)
-colData = read.csv('experimental_info.csv', header = TRUE, row.names = 1)[, c("phenotype")]
-colnames(countData) = paste0(colData["phenotype"], '_')
-rownames(colData) = paste0(colData["phenotype"], '_')
-# construct the data that analyzing functions from DESeq2 can recognize.
-dds = DESeqDataSetFromMatrix(countData=countData,colData=colData,design=~phenotype)
-dds
+setwd("~/Desktop/Stewartii_Transcriptome_Analysis")
+> countData<-read.csv('count_data.csv', header=TRUE, row.names=1)
+> colData<-read.csv('experimental_info.csv', header=TRUE, row.names=1)
+> rownames(colData)<-colData$run
+> colnames<-c("wildtype", "drcsa", "dlrha")
+> ddsFullCountTable<-DESeqDataSetFromMatrix(
++ countData=countData,
++ colData=colData,
++ design=~phenotype)
+> ddsFullCountTable
+#output
+class: DESeqDataSet 
+dim: 5182 3 
+metadata(1): version
+assays(1): counts
+rownames(5182): gene0 gene1 ... gene998 gene999
+rowData names(0):
+colnames(3): SRR2033675 SRR2033686 SRR2033699
+colData names(1): phenotype
 
- colnames(countData) = paste0(colData$run_accession_ID, '_', colData$phenotype)
-> rownames(colData) = paste0(colData$run_accession_ID, '_', colData$phenotype)
+#Discard rows with 0 for all treatments
+> dim(ddsFullCountTable)
+[1] 5182    3
+> ddsFullCountTable=ddsFullCountTable[rowSums(counts(ddsFullCountTable))>1, ]
+> dim(ddsFullCountTable)
+[1] 4598    3
+
+#Differential Expression Analysis
 > dds = DESeqDataSetFromMatrix(countData = countData,
-+                              colData = colData,
-+                              design = ~ run_accession_ID + phenotype)
++ colData=colData,
++ design=~phenotype)
+> dds = dds[rowSums(counts(dds))>1, ]
+> dds = DESeq(dds)
+
+>res=results(dds)
+>res
+#Results
+log2 fold change (MAP): phenotype wildtype vs dlrha 
+Wald test p-value: phenotype wildtype vs dlrha 
+DataFrame with 4598 rows and 6 columns
+            baseMean log2FoldChange     lfcSE        stat    pvalue
+           <numeric>      <numeric> <numeric>   <numeric> <numeric>
+gene1       0.700237    0.004239191 0.1946948 0.021773516 0.9826286
+gene10     72.072182    0.521877233 0.4609954 1.132065916 0.2576067
+gene1000  439.877687    0.094763942 0.3910117 0.242355781 0.8085045
+gene1001 1317.930440    0.003178242 0.3693638 0.008604639 0.9931346
+gene1002  417.328999    0.020150250 0.4042933 0.049840679 0.9602493
+...              ...            ...       ...         ...       ...
+gene995     94.66574    -0.40387736 0.4517270 -0.89407401 0.3712823
+gene996    257.77359    -0.31645006 0.3980386 -0.79502355 0.4265998
+gene997     22.58992    -0.34620778 0.4620127 -0.74934686 0.4536482
+gene998    425.52402     0.30153032 0.4300083  0.70121983 0.4831658
+gene999    149.84283     0.03577307 0.3996800  0.08950428 0.9286812
+              padj
+         <numeric>
+gene1            1
+gene10           1
+gene1000         1
+gene1001         1
+gene1002         1
+...            ...
+gene995          1
+gene996          1
+gene997          1
+gene998          1
+gene999          1
+
+#For results of other phenotypes
+res <- results( dds, contrast = c("phenotype", "wildtype", "drcsa") )
+
+#Results
+log2 fold change (MAP): phenotype wildtype vs drcsa 
+Wald test p-value: phenotype wildtype vs drcsa 
+DataFrame with 4598 rows and 6 columns
+            baseMean log2FoldChange     lfcSE       stat    pvalue
+           <numeric>      <numeric> <numeric>  <numeric> <numeric>
+gene1       0.700237      0.1104206 0.1954464   0.564966 0.5720969
+gene10     72.072182      0.9221903 0.4611110   1.999931 0.0455077
+gene1000  439.877687      0.3976957 0.3911824   1.016650 0.3093198
+gene1001 1317.930440     -0.2419802 0.3691355  -0.655532 0.5121253
+gene1002  417.328999     -0.4246770 0.4036190  -1.052173 0.2927202
+...              ...            ...       ...        ...       ...
+gene995     94.66574     0.39788806 0.4525474  0.8792185 0.3792828
+gene996    257.77359     0.05917647 0.3984209  0.1485275 0.8819265
+gene997     22.58992    -0.45397255 0.4618312 -0.9829838 0.3256154
+gene998    425.52402    -0.41484750 0.4293970 -0.9661164 0.3339859
+gene999    149.84283    -0.21946627 0.3982569 -0.5510671 0.5815877
+              padj
+         <numeric>
+gene1    0.9996134
+gene10   0.9996134
+gene1000 0.9996134
+gene1001 0.9996134
+gene1002 0.9996134
+...            ...
+gene995  0.9996134
+gene996  0.9996134
+gene997  0.9996134
+gene998  0.9996134
+gene999  0.9996134
+
+#Generate plots able to download to computer
+plotMa(res)
+
+#Significantly downregulated genes in drcsa so sorted by greatest log2foldchange
+resSig <- res[ which(res$padj < 1 ), ]
+> head( resSig[ order( resSig$log2FoldChange ), ] )
+#Results
+log2 fold change (MAP): phenotype wildtype vs drcsa 
+Wald test p-value: phenotype wildtype vs drcsa 
+DataFrame with 6 rows and 6 columns
+          baseMean log2FoldChange     lfcSE      stat     pvalue
+         <numeric>      <numeric> <numeric> <numeric>  <numeric>
+gene1858 638.27245      -1.169650 0.4609938 -2.537237 0.01117313
+gene1860 211.29409      -1.086756 0.4593174 -2.366024 0.01798030
+gene2016  62.60177      -1.084298 0.4537689 -2.389538 0.01686958
+gene1878 198.24288      -1.080394 0.4619669 -2.338682 0.01935190
+gene2013 214.03345      -1.079362 0.4618564 -2.337008 0.01943878
+gene3358  68.29754      -1.050606 0.4504138 -2.332535 0.01967257
+              padj
+         <numeric>
+gene1858 0.9996134
+gene1860 0.9996134
+gene2016 0.9996134
+gene1878 0.9996134
+gene2013 0.9996134
+gene3358 0.9996134
+
+#Save to file
+write.csv(as.data.frame(resSig), "wildtype_vs_drcsa_downregulate.csv")
+
+#Strongest upregulation
+> tail( resSig[ order( resSig$log2FoldChange ), ] )
+log2 fold change (MAP): phenotype wildtype vs drcsa 
+Wald test p-value: phenotype wildtype vs drcsa 
+DataFrame with 6 rows and 6 columns
+           baseMean log2FoldChange     lfcSE      stat     pvalue      padj
+          <numeric>      <numeric> <numeric> <numeric>  <numeric> <numeric>
+gene370   8873.6353      0.9980797 0.4547160  2.194952 0.02816706 0.9996134
+gene2862   687.3696      1.0013195 0.4590584  2.181246 0.02916521 0.9996134
+gene1956   421.7283      1.0427543 0.4592877  2.270373 0.02318498 0.9996134
+gene2771  6510.4525      1.0595876 0.4585878  2.310545 0.02085802 0.9996134
+gene474    388.2069      1.0662604 0.4604768  2.315558 0.02058244 0.9996134
+gene1907 81992.2733      1.1014399 0.4596908  2.396045 0.01657305 0.9996134
+
+#Plot low p-values
+> resSig <- res[ which(res$pvalue < 0.02 ), ]
+> plotMA(resSig)
+
+
+#Downregulated in drlha
+> resSig <- res[ which(res$padj < 1.1 ), ]
+> head( resSig[ order( resSig$log2FoldChange ), ] )
+log2 fold change (MAP): phenotype wildtype vs dlrha 
+Wald test p-value: phenotype wildtype vs dlrha 
+DataFrame with 6 rows and 6 columns
+          baseMean log2FoldChange     lfcSE      stat     pvalue      padj
+         <numeric>      <numeric> <numeric> <numeric>  <numeric> <numeric>
+gene3118  157.2632      -1.174222 0.4568648 -2.570174 0.01016473         1
+gene3111  196.2756      -1.152018 0.4583422 -2.513446 0.01195581         1
+gene3128  116.0222      -1.145461 0.4577149 -2.502565 0.01232970         1
+gene3119  133.7141      -1.138589 0.4594887 -2.477948 0.01321403         1
+gene3127  323.2276      -1.115792 0.4617091 -2.416656 0.01566380         1
+gene3117  134.4405      -1.094876 0.4603049 -2.378589 0.01737906         1
+
+#Upregulated in dlrha
+> tail( resSig[ order( resSig$log2FoldChange ), ] )
+log2 fold change (MAP): phenotype wildtype vs dlrha 
+Wald test p-value: phenotype wildtype vs dlrha 
+DataFrame with 6 rows and 6 columns
+          baseMean log2FoldChange     lfcSE      stat     pvalue      padj
+         <numeric>      <numeric> <numeric> <numeric>  <numeric> <numeric>
+gene4848  294.5256      0.8781837 0.4603447  1.907665 0.05643448         1
+gene3297  187.8017      0.8964351 0.4598608  1.949362 0.05125224         1
+gene912   368.9433      0.8974961 0.4619252  1.942947 0.05202258         1
+gene911   904.4512      0.9428373 0.4620334  2.040626 0.04128804         1
+gene5133 3969.6576      0.9715000 0.4593097  2.115131 0.03441881         1
+gene909  1511.3410      1.0435125 0.4620079  2.258646 0.02390540         1
