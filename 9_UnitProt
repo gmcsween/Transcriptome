@@ -1,0 +1,40 @@
+#Add CKS_locus, Gene_name, and Function to exported excel files of  DESeq data for top log2ratio hits
+#Use CKS_locus to search unitprot.org for gene name and function
+
+#Downregulated Genes in dLrhA
+	            baseMean	log2FoldChange	lfcSE	        stat	pvalue	   padj	CKS_locus	Gene	Function
+gene3118	157.2632044	-1.174222193	0.456864785	-2.570174438	0.010164732	1	CKS_2549		
+gene3111	196.2756263	-1.152018292	0.45834219	-2.513445887	0.011955812	1	CKS_2629	CKS_2629	Phage tail sheath protein FI
+gene3128	116.0222235	-1.145461233	0.457714871	-2.502565038	0.012329697	1	CKS_2612	CKS_2612	Phage holin
+gene3119	133.7141008	-1.138589292	0.459488749	-2.477948145	0.013214035	1	CKS_2621	CKS_2621	
+gene3127	323.2275923	-1.115792177	0.461709069	-2.416656399	0.015663795	1	CKS_2613	CKS_2613	chitinase activity
+gene3117	134.4405035	-1.094875908	0.460304877	-2.378588545	0.017379062	1	CKS_2623	CKS_2623	
+
+#Upregulated Genes in dLrhA
+
+	          baseMean	log2FoldChange	lfcSE	    stat	    pvalue	padj	CKS_locus	Gene	Function
+gene3297	187.8017333	0.896435115	0.459860824	1.949361782	0.051252235	1	CKS_2879	CKS_2879	
+gene912	368.9433301	0.897496093	0.461925181	1.942946886	0.052022576	1	CKS_4775	CKS_4775	
+gene911	904.4512298	0.942837349	0.462033437	2.040625796	0.041288036	1	CKS_4774	CKS_4774	siderophore transmembrane transporter activity
+gene5133	3969.657639	0.971499989	0.459309674	2.115130694	0.03441881	1	CKS_5240	fhuA	siderophore transport/iron ion binding
+gene909	1511.341039	1.04351251	0.462007944	2.258646249	0.023905398	1	CKS_4772	CKS_4772	siderophore transport/iron ion binding
+
+#Downregulated Genes in dRcsA
+
+	        baseMean	log2FoldChange	lfcSE	        stat	      pvalue	padj	      CKS_locus	Gene_name	Function
+gene1858	638.2724476	-1.169650342	0.460993761	-2.537236816	0.011173134	0.9996134	1282	cysN	GTPase activity is coupled to stimulation of the rate of APS formation.
+gene1860	211.2940866	-1.086755666	0.459317358	-2.366023504	0.017980303	0.9996134	1284	cysG	Multifunctional enzyme that catalyzes the SAM-dependent methylations of uroporphyrinogen III at position C-2 and C-7 to form precorrin-2 via precorrin-1. Then it catalyzes the NAD-dependent ring dehydrogenation of precorrin-2 to yield sirohydrochlorin. Finally, it catalyzes the ferrochelation of sirohydrochlorin to yield siroheme.
+gene2016	62.60176942	-1.08429802	0.453768901	-2.38953797	0.01686958	0.9996134	1473	CKS_1473	ATPase activity
+gene1878	198.2428849	-1.080393781	0.461966938	-2.338682038	0.019351895	0.9996134	1304	cysJ	This protein is involved in step 1 of the subpathway that synthesizes hydrogen sulfide from sulfite (NADPH route)
+gene2013	214.0334461	-1.079361942	0.461856389	-2.337007711	0.019438783	0.9996134	1476	CKS_1476	Extracellular solute-binding protein
+gene3358	68.29753701	-1.050605861	0.450413779	-2.332534901	0.019672569	0.9996134	2810	CKS_2810	Putative oxidoreductase
+
+#Upregulated Genes in dRcsA
+
+	        baseMean	log2FoldChange	lfcSE	      stat	pvalue	padj	      CSK_locus	Gene	Function
+gene370	8873.635314	0.998079731	0.454716031	2.194951713	0.028167062	0.9996134	CKS_3439	gloA	Catalyzes the conversion of hemimercaptal, formed from methylglyoxal and glutathione, to S-lactoylglutathione.
+gene2862	687.3695577	1.001319483	0.459058425	2.181246281	0.029165205	0.9996134	CKS_2158	lpxT	Involved in the modification of the lipid A domain of lipopolysaccharides (LPS). Transfers a phosphate group from undecaprenyl pyrophosphate (C55-PP) to lipid A to form lipid A 1-diphosphate. Contributes to the recycling of undecaprenyl phosphate (C55-P)
+gene1956	421.7283165	1.042754349	0.459287733	2.27037274	0.023184977	0.9996134	CKS_1385	gcvH	The glycine cleavage system catalyzes the degradation of glycine. The H protein shuttles the methylamine group of glycine from the P protein to the T protein
+gene2771	6510.452541	1.059587579	0.458587807	2.310544593	0.020858023	0.9996134	CKS_2268	CKS_2268	transaminase activity
+gene474	388.2069258	1.066260424	0.46047675	2.315557569	0.020582438	0.9996134	CKS_0528	dnaG	RNA polymerase that catalyzes the synthesis of short RNA molecules used as primers for DNA polymerase during DNA replication
+gene1907	81992.27333	1.101439884	0.45969081	2.396045037	0.016573054	0.9996134	CKS_5766	gcvB	decarboxylating activity
