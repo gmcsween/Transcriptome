@@ -18,5 +18,5 @@ fastq-dump SRR2033686 #RcsA deletion strain
 fastq-dump SRR2033675 #WT strain
 
 #Get reference genome
-wget wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF_000757405.1_LMG2632assem4_genomic.fna.gz
-gunzip GCF_000757405.1_LMG2632assem4_genomic.fna.gz
+wget wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA_000248395.2_ASM24839v2_genomic.fna.gz
+gunzip GCA_000248395.2_ASM24839v2_genomic.fna.gz
