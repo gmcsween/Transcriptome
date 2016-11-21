@@ -124,22 +124,14 @@ resSig <- res[ which(res$padj < 1 ), ]
 log2 fold change (MAP): phenotype wildtype vs drcsa 
 Wald test p-value: phenotype wildtype vs drcsa 
 DataFrame with 6 rows and 6 columns
-          baseMean log2FoldChange     lfcSE      stat     pvalue
-         <numeric>      <numeric> <numeric> <numeric>  <numeric>
-gene1858 638.27245      -1.169650 0.4609938 -2.537237 0.01117313
-gene1860 211.29409      -1.086756 0.4593174 -2.366024 0.01798030
-gene2016  62.60177      -1.084298 0.4537689 -2.389538 0.01686958
-gene1878 198.24288      -1.080394 0.4619669 -2.338682 0.01935190
-gene2013 214.03345      -1.079362 0.4618564 -2.337008 0.01943878
-gene3358  68.29754      -1.050606 0.4504138 -2.332535 0.01967257
-              padj
-         <numeric>
-gene1858 0.9996134
-gene1860 0.9996134
-gene2016 0.9996134
-gene1878 0.9996134
-gene2013 0.9996134
-gene3358 0.9996134
+          baseMean log2FoldChange     lfcSE      stat     pvalue      padj
+         <numeric>      <numeric> <numeric> <numeric>  <numeric> <numeric>
+gene1858 638.27245      -1.169650 0.4609938 -2.537237 0.01117313 0.9996134
+gene1860 211.29409      -1.086756 0.4593174 -2.366024 0.01798030 0.9996134
+gene2016  62.60177      -1.084298 0.4537689 -2.389538 0.01686958 0.9996134
+gene1878 198.24288      -1.080394 0.4619669 -2.338682 0.01935190 0.9996134
+gene2013 214.03345      -1.079362 0.4618564 -2.337008 0.01943878 0.9996134
+gene3358  68.29754      -1.050606 0.4504138 -2.332535 0.01967257 0.9996134
 
 #Save to file
 write.csv(as.data.frame(resSig), "wildtype_vs_drcsa_downregulate.csv")
