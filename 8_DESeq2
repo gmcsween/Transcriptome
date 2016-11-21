@@ -183,3 +183,15 @@ gene912   368.9433      0.8974961 0.4619252  1.942947 0.05202258         1
 gene911   904.4512      0.9428373 0.4620334  2.040626 0.04128804         1
 gene5133 3969.6576      0.9715000 0.4593097  2.115131 0.03441881         1
 gene909  1511.3410      1.0435125 0.4620079  2.258646 0.02390540         1
+
+#Likelihood Ratio Test
+> orderedResLRT = resLRT[order(resLRT$padj), ]
+> sigOrderedResLRT = subset(orderedResLRT, padj<0.05)
+> dim(sigOrderedResLRT)
+[1] 0 6
+
+> sigOrderResLRT=results( dds, contrast = c("phenotype", "wildtype", "drcsa") )
+> sigOrderedResLRT = subset(orderedResLRT, padj<0.05)
+> dim(sigOrderedResLRT)
+[1] 0 6
+#No significant values
