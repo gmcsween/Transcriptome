@@ -184,6 +184,12 @@ gene911   904.4512      0.9428373 0.4620334  2.040626 0.04128804         1
 gene5133 3969.6576      0.9715000 0.4593097  2.115131 0.03441881         1
 gene909  1511.3410      1.0435125 0.4620079  2.258646 0.02390540         1
 
+#Save significant log2fold changes to files
+res <- results( dds, contrast = c("phenotype", "wildtype", "drcsa") )
+> resSig <- res[ which(res$pvalue < 0.02 ), ]
+> write.csv(as.data.frame(head( resSig[ order( resSig$log2FoldChange ), ] )), "wildtype_vs_drcsa_downregulate_head.csv")
+> write.csv(as.data.frame(tail( resSig[ order( resSig$log2FoldChange ), ] )), "wildtype_vs_rcsa_upregulate_head.csv")
+
 #Likelihood Ratio Test
 > orderedResLRT = resLRT[order(resLRT$padj), ]
 > sigOrderedResLRT = subset(orderedResLRT, padj<0.05)
@@ -195,3 +201,4 @@ gene909  1511.3410      1.0435125 0.4620079  2.258646 0.02390540         1
 > dim(sigOrderedResLRT)
 [1] 0 6
 #No significant values
+
